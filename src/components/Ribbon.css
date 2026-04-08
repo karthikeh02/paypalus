@@ -1,0 +1,34 @@
+.ribbon {
+  background: #001435;
+  padding: 36px 0;
+}
+
+.ribbon .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.ribbon-text h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+.ribbon-text p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.3125rem;
+  line-height: 1.5rem;
+  margin-top: 6px;
+}
+
+@media (max-width: 768px) {
+  .ribbon .container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}

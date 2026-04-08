@@ -1,0 +1,31 @@
+.brands-section {
+  padding: 72px 0 64px;
+}
+
+.brands-section .section-title {
+  margin-bottom: 40px;
+}
+
+.brands-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.brand-logo {
+  width: 130px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.brand-logo:hover {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .brands-grid { gap: 24px; }
+  .brand-logo { width: 100px; }
+}

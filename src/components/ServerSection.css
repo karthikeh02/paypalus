@@ -1,0 +1,113 @@
+.server-section {
+  padding: 72px 0;
+  background: #001435;
+}
+
+.server-heading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #fff;
+  text-align: left;
+  margin-bottom: 56px;
+  line-height: 1.3;
+}
+
+.server-subtitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.server-desc {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 36px;
+  line-height: 1.6;
+}
+
+.server-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.server-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.server-card-label {
+  font-size: 0.75rem;
+  color: #6c6c6c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.server-card-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #001435;
+  margin: 8px 0 20px;
+}
+
+.server-btn {
+  background: #001435;
+  color: #fff;
+  padding: 10px 28px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+.server-btn:hover {
+  background: #001c64;
+}
+
+.server-card-features {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+.server-card-features li {
+  font-size: 0.8125rem;
+  color: #001435;
+  line-height: 1.5;
+  padding: 8px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.server-card-features li + li {
+  border-top: 1px solid #f0f0f0;
+}
+
+.check-icon {
+  color: #00a86b;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  margin-top: 1px;
+}
+
+@media (max-width: 768px) {
+  .server-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .server-heading {
+    text-align: center;
+    font-size: 1.75rem;
+  }
+}

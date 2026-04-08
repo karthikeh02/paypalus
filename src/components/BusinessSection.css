@@ -1,0 +1,55 @@
+.business-section {
+  padding: 72px 0 80px;
+  background: #001435;
+  position: relative;
+  overflow: hidden;
+}
+
+.business-section .section-title {
+  color: #fff;
+  text-align: left;
+}
+
+.business-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.business-text {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.business-item h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #fff;
+  line-height: 2rem;
+}
+
+.business-item p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.business-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.business-image img {
+  max-height: 460px;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .business-grid { grid-template-columns: 1fr; }
+  .business-section .section-title { text-align: center; }
+}
