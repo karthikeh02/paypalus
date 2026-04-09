@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+screenshots/
+screenshot.mjs
+screenshot-compare.mjs
+screenshot-navbar.mjs
 
 # Environment variables
 .env
