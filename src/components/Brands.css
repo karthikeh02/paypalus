@@ -19,10 +19,6 @@
   height: auto;
   object-fit: contain;
   opacity: 0.9;
-  transition: opacity 0.2s;
-}
-.brand-logo:hover {
-  opacity: 1;
 }
 
 @media (max-width: 768px) {

@@ -1,4 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom'
+import { motion } from 'motion/react'
+import { fadeUp, viewportOnce } from '../animations'
 import './Footer.css'
 
 const IndiaFlag = () => (
@@ -24,14 +26,29 @@ function FooterLink({ children }) {
     }
   }
 
-  return <a href="/" onClick={handleClick}>{children}</a>
+  return (
+    <motion.a
+      href="/"
+      onClick={handleClick}
+      whileHover={{ x: 2, color: '#0070e0' }}
+      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.a>
+  )
 }
 
 export default function Footer() {
   return (
     <>
       {/* Terms & Conditions Section */}
-      <section className="terms-section">
+      <motion.section
+        className="terms-section"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <div className="container">
           <h4 className="terms-heading">Terms & Conditions:</h4>
           <p>* Buyer Protection is available on eligible purchases only. See the Buyer Protection section of the User Agreement for more information.</p>
@@ -49,10 +66,16 @@ export default function Footer() {
           <br />
           <p>When you visit or interact with our sites, services, applications, tools or messaging, we or our authorised service providers may use cookies, web beacons, and other similar technologies for storing information to help provide you with a better, faster and safer experience and for advertising purposes. Learn more here.</p>
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
-      <footer className="footer">
+      <motion.footer
+        className="footer"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <div className="container">
           <div className="footer-logo">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
@@ -97,7 +120,7 @@ export default function Footer() {
             <p>When you visit or interact with our sites, services, applications, tools or messaging, we or our authorised service providers may use cookies, web beacons, and other similar technologies for storing information to help provide you with a better, faster and safer experience and for advertising purposes. Learn more here.</p>
           </div>
         </div>
-      </footer>
+      </motion.footer>
     </>
   )
 }

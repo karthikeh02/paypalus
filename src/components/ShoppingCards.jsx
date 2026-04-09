@@ -1,4 +1,6 @@
+import { motion } from 'motion/react'
 import { scrollToSupport } from '../utils/scrollToSupport'
+import { fadeUp, staggerContainer, staggerItem, viewportOnce, cardHover, cardTap, buttonHover, buttonTap } from '../animations'
 import './ShoppingCards.css'
 
 const cards = [
@@ -29,19 +31,47 @@ export default function ShoppingCards() {
   return (
     <section className="shopping-section">
       <div className="container">
-        <h2 className="section-title">Find more ways to shop with PayPal for you.</h2>
-        <div className="cards-grid">
+        <motion.h2
+          className="section-title"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
+          Find more ways to shop with PayPal for you.
+        </motion.h2>
+        <motion.div
+          className="cards-grid"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {cards.map((card, i) => (
-            <div className="card" key={i}>
+            <motion.div
+              className="card"
+              key={i}
+              variants={staggerItem}
+              whileHover={cardHover}
+              whileTap={cardTap}
+            >
               <img src={card.img} alt={card.alt} className="card-img" />
               <div className="card-body">
                 <h3>{card.title}</h3>
                 <p>{card.desc}</p>
-                <a href="/" onClick={scrollToSupport} className="btn btn-filled-blue">{card.btn}</a>
+                <motion.a
+                  href="/"
+                  onClick={scrollToSupport}
+                  className="btn btn-filled-blue"
+                  whileHover={buttonHover}
+                  whileTap={buttonTap}
+                >
+                  {card.btn}
+                </motion.a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

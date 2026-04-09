@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'motion/react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { pageTransition, fadeUp, staggerContainer, staggerItem, viewportOnce, buttonHover, buttonTap } from '../animations'
 import './Cancellation.css'
 
 const terms = [
@@ -31,52 +33,80 @@ export default function Cancellation() {
   }
 
   return (
-    <>
+    <motion.div {...pageTransition}>
       <Navbar />
       <div className="cancellation-page">
         <div className="cancellation-container">
-          <h1 className="cancellation-heading">Terms & Conditions :</h1>
+          <motion.h1
+            className="cancellation-heading"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+          >
+            Terms & Conditions :
+          </motion.h1>
 
-          {terms.map((text, i) => (
-            <div className="term-card" key={i}>
-              <p className="term-text">{text}</p>
-              <div className="term-options">
-                <label className="term-option">
-                  <input
-                    type="checkbox"
-                    checked={answers[i] === 'agree'}
-                    onChange={() => setAnswer(i, answers[i] === 'agree' ? null : 'agree')}
-                  />
-                  Agree
-                </label>
-                <label className="term-option">
-                  <input
-                    type="checkbox"
-                    checked={answers[i] === 'disagree'}
-                    onChange={() => setAnswer(i, answers[i] === 'disagree' ? null : 'disagree')}
-                  />
-                  Disagree
-                </label>
-              </div>
-            </div>
-          ))}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
+            {terms.map((text, i) => (
+              <motion.div
+                className="term-card"
+                key={i}
+                variants={staggerItem}
+                whileHover={{ y: -2, transition: { duration: 0.18 } }}
+              >
+                <p className="term-text">{text}</p>
+                <div className="term-options">
+                  <label className="term-option">
+                    <input
+                      type="checkbox"
+                      checked={answers[i] === 'agree'}
+                      onChange={() => setAnswer(i, answers[i] === 'agree' ? null : 'agree')}
+                    />
+                    Agree
+                  </label>
+                  <label className="term-option">
+                    <input
+                      type="checkbox"
+                      checked={answers[i] === 'disagree'}
+                      onChange={() => setAnswer(i, answers[i] === 'disagree' ? null : 'disagree')}
+                    />
+                    Disagree
+                  </label>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
 
-          <div className="cancellation-note">
+          <motion.div
+            className="cancellation-note"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+          >
             <p><strong>NOTE :</strong> You are connected to the secured network of Paypal&reg; securities for your removal Of the Auto-Payment Set-up,</p>
             <p>Once your REFUND-ID is generated you will be disconnected from the Secured network.</p>
             <p>As Per The regulations & guidelines of Better Business Bureau&reg;.</p>
-          </div>
+          </motion.div>
 
-          <button
+          <motion.button
             className={`cancellation-continue ${allAgreed ? '' : 'disabled'}`}
             onClick={handleContinue}
             disabled={!allAgreed}
+            whileHover={allAgreed ? buttonHover : {}}
+            whileTap={allAgreed ? buttonTap : {}}
+            animate={allAgreed ? { opacity: 1, boxShadow: '0 8px 24px rgba(0,0,0,0.18)' } : { opacity: 0.5, boxShadow: '0 0 0 rgba(0,0,0,0)' }}
+            transition={{ duration: 0.3 }}
           >
             CONTINUE
-          </button>
+          </motion.button>
         </div>
       </div>
       <Footer />
-    </>
+    </motion.div>
   )
 }

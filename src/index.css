@@ -69,7 +69,6 @@ img {
   border-radius: 20px;
   cursor: pointer;
   border: none;
-  transition: all 0.2s ease;
   text-align: center;
   line-height: 1.4;
 }
@@ -119,4 +118,14 @@ img {
   margin-bottom: 48px;
   color: #001c64;
   line-height: 2.5rem;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

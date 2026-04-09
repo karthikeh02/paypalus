@@ -1,7 +1,14 @@
 import { useState } from 'react'
+import { motion } from 'motion/react'
+import emailjs from '@emailjs/browser'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { pageTransition, fadeUp, fadeLeft, fadeRight, staggerContainer, staggerItem, viewportOnce, cardHover, cardTap, buttonHover, buttonTap } from '../animations'
 import './CancellationForm.css'
+
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 const testimonials = [
   {
@@ -40,26 +47,55 @@ export default function CancellationForm() {
   const [form, setForm] = useState({
     FirstName: '', LastName: '', Email: '', Mobile: '', BankName: '', Feedback: '',
   })
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Placeholder for EmailJS integration
-    console.log('Form submitted:', form)
-    alert('Form submitted successfully! Your Refund ID will be generated shortly.')
+
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      setStatus('error')
+      setErrorMsg('EmailJS is not configured. Please set environment variables.')
+      return
+    }
+
+    setStatus('sending')
+    setErrorMsg('')
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        form,
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      )
+      setStatus('success')
+      setForm({ FirstName: '', LastName: '', Email: '', Mobile: '', BankName: '', Feedback: '' })
+    } catch (err) {
+      console.error('EmailJS error:', err)
+      setStatus('error')
+      setErrorMsg(err?.text || 'Something went wrong. Please try again.')
+    }
   }
 
   return (
-    <>
+    <motion.div {...pageTransition}>
       <Navbar />
 
       {/* Banner */}
       <div className="cf-banner">
         <div className="container">
-          <h1>Better Business Bureau&reg; Regulated Cancellation Form</h1>
+          <motion.h1
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+          >
+            Better Business Bureau&reg; Regulated Cancellation Form
+          </motion.h1>
         </div>
       </div>
 
@@ -70,7 +106,13 @@ export default function CancellationForm() {
 
             {/* Left - Policy + Form */}
             <div>
-              <div className="cf-policy">
+              <motion.div
+                className="cf-policy"
+                variants={fadeLeft}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
                 <p>
                   All companies associated with the bureau operate using a fully customer-focused
                   approach, and our commitment is to serve your best interests. To support this
@@ -86,9 +128,15 @@ export default function CancellationForm() {
                   <li>4. All representatives are well-trained professionals and are strictly prohibited from requesting any banking details or personal information from you.</li>
                   <li>5. You will be required to log in to your online banking account and wait for the billing manager to send a payment request. Once you approve the request, your refund will be processed; just confirm once it&apos;s received.</li>
                 </ol>
-              </div>
+              </motion.div>
 
-              <form onSubmit={handleSubmit}>
+              <motion.form
+                onSubmit={handleSubmit}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
                 <div className="cf-form-row">
                   <div className="cf-field">
                     <label>First Name</label>
@@ -117,12 +165,44 @@ export default function CancellationForm() {
                   <label>Feedback</label>
                   <textarea name="Feedback" placeholder="Write your feedback here..." value={form.Feedback} onChange={handleChange} required />
                 </div>
-                <button type="submit" className="cf-submit">SUBMIT</button>
-              </form>
+                <motion.button
+                  type="submit"
+                  className="cf-submit"
+                  disabled={status === 'sending'}
+                  whileHover={status === 'sending' ? {} : buttonHover}
+                  whileTap={status === 'sending' ? {} : buttonTap}
+                >
+                  {status === 'sending' ? 'SENDING...' : 'SUBMIT'}
+                </motion.button>
+                {status === 'success' && (
+                  <motion.p
+                    className="cf-form-message cf-form-success"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                  >
+                    &#10003; Form submitted successfully! Your Refund ID will be generated shortly.
+                  </motion.p>
+                )}
+                {status === 'error' && (
+                  <motion.p
+                    className="cf-form-message cf-form-error"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                  >
+                    {errorMsg}
+                  </motion.p>
+                )}
+              </motion.form>
             </div>
 
             {/* Right - Contact Info + Map */}
-            <div className="cf-contact">
+            <motion.div
+              className="cf-contact"
+              variants={fadeRight}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
               <h3>Contact Info</h3>
               <div className="cf-contact-address">
                 <div className="cf-contact-dot" />
@@ -136,7 +216,7 @@ export default function CancellationForm() {
                   title="Office Location"
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -144,9 +224,21 @@ export default function CancellationForm() {
       {/* Testimonials */}
       <section className="cf-testimonials">
         <div className="container">
-          <div className="cf-testimonials-grid">
+          <motion.div
+            className="cf-testimonials-grid"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+          >
             {testimonials.map((t, i) => (
-              <div key={i} className={`cf-tcard cf-tcard--${t.theme}`}>
+              <motion.div
+                key={i}
+                className={`cf-tcard cf-tcard--${t.theme}`}
+                variants={staggerItem}
+                whileHover={cardHover}
+                whileTap={cardTap}
+              >
                 <div className="cf-tcard-header">
                   <div className="cf-tcard-avatar">&#128100;</div>
                   <div className="cf-tcard-info">
@@ -156,13 +248,13 @@ export default function CancellationForm() {
                 </div>
                 <h3>{t.heading}</h3>
                 <p>{t.quote}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <Footer />
-    </>
+    </motion.div>
   )
 }

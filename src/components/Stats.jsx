@@ -1,3 +1,5 @@
+import { motion } from 'motion/react'
+import { fadeUp, staggerContainer, staggerItem, viewportOnce } from '../animations'
 import './Stats.css'
 
 const stats = [
@@ -27,15 +29,34 @@ export default function Stats() {
   return (
     <section className="stats-section">
       <div className="container">
-        <h2 className="section-title">PayPal by the numbers.</h2>
-        <div className="stats-grid">
+        <motion.h2
+          className="section-title"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
+          PayPal by the numbers.
+        </motion.h2>
+        <motion.div
+          className="stats-grid"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {stats.map((stat, i) => (
-            <div className="stat-item" key={i}>
+            <motion.div
+              className="stat-item"
+              key={i}
+              variants={staggerItem}
+              whileHover={{ y: -4, scale: 1.05, transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] } }}
+            >
               <img src={stat.icon} alt={stat.alt} className="stat-icon" />
               <p>{stat.text}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -1,4 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { motion } from 'motion/react'
+import { EASE, buttonHover, buttonTap } from '../animations'
 import './Navbar.css'
 
 const PPIcon = () => (
@@ -27,12 +29,26 @@ function NavLink({ children }) {
     }
   }
 
-  return <a href="/" onClick={handleClick}>{children}</a>
+  return (
+    <motion.a
+      href="/"
+      onClick={handleClick}
+      whileHover={{ color: '#0070e0', y: -1 }}
+      transition={{ duration: 0.18, ease: EASE }}
+    >
+      {children}
+    </motion.a>
+  )
 }
 
 export default function Navbar() {
   return (
-    <nav className="navbar">
+    <motion.nav
+      className="navbar"
+      initial={{ y: -64, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: EASE }}
+    >
       <div className="container">
         <div className="navbar-left">
           <NavLink><span className="navbar-logo"><PPIcon /><span className="navbar-logo-text">PayPal</span></span></NavLink>
@@ -41,14 +57,32 @@ export default function Navbar() {
             <li><NavLink>Small Business <Chevron /></NavLink></li>
             <li><NavLink>Enterprise <Chevron /></NavLink></li>
             <li><NavLink>Partners <Chevron /></NavLink></li>
-            <li><Link to="/cancellation">Cancellation <Chevron /></Link></li>
+            <li>
+              <motion.span
+                whileHover={{ color: '#0070e0', y: -1 }}
+                transition={{ duration: 0.18, ease: EASE }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}
+              >
+                <Link to="/cancellation" style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                  Cancellation <Chevron />
+                </Link>
+              </motion.span>
+            </li>
           </ul>
         </div>
         <div className="navbar-right">
-          <NavLink><span className="btn btn-nav-login">Log In</span></NavLink>
-          <NavLink><span className="btn btn-nav-signup">Sign Up</span></NavLink>
+          <NavLink>
+            <motion.span className="btn btn-nav-login" whileHover={buttonHover} whileTap={buttonTap}>
+              Log In
+            </motion.span>
+          </NavLink>
+          <NavLink>
+            <motion.span className="btn btn-nav-signup" whileHover={buttonHover} whileTap={buttonTap}>
+              Sign Up
+            </motion.span>
+          </NavLink>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   )
 }

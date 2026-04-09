@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { scrollToSupport } from '../utils/scrollToSupport'
+import { heroSlide, EASE, buttonHover, buttonTap } from '../animations'
 import './Hero.css'
 
 const slides = [
@@ -25,37 +27,79 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    const timer = setInterval(() => goTo(current + 1), 3000)
+    const timer = setInterval(() => goTo(current + 1), 4000)
     return () => clearInterval(timer)
   }, [current, goTo])
 
+  const slide = slides[current]
+
   return (
     <section className="hero">
-      {slides.map((slide, i) => (
-        <div
-          key={i}
-          className={`hero-slide ${i === current ? 'active' : ''}`}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={current}
+          className="hero-slide"
           style={{ backgroundImage: `url('${slide.bg}')` }}
+          variants={heroSlide}
+          initial="enter"
+          animate="center"
+          exit="exit"
         >
-          <div className="hero-content">
+          <motion.div
+            className="hero-content"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
+          >
             <h1>{slide.h1}</h1>
             <p>{slide.p}</p>
-            <a href="/" onClick={scrollToSupport} className="btn btn-white-outline btn-lg">{slide.btnText}</a>
-          </div>
-        </div>
-      ))}
+            <motion.a
+              href="/"
+              onClick={scrollToSupport}
+              className="btn btn-white-outline btn-lg"
+              whileHover={buttonHover}
+              whileTap={buttonTap}
+            >
+              {slide.btnText}
+            </motion.a>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
 
       <div className="hero-arrows">
-        <button className="hero-arrow" onClick={() => goTo(current - 1)}>&#10094;</button>
-        <button className="hero-arrow" onClick={() => goTo(current + 1)}>&#10095;</button>
+        <motion.button
+          className="hero-arrow"
+          onClick={() => goTo(current - 1)}
+          whileHover={{ scale: 1.15, backgroundColor: 'rgba(255,255,255,0.4)' }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ duration: 0.18, ease: EASE }}
+        >
+          &#10094;
+        </motion.button>
+        <motion.button
+          className="hero-arrow"
+          onClick={() => goTo(current + 1)}
+          whileHover={{ scale: 1.15, backgroundColor: 'rgba(255,255,255,0.4)' }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ duration: 0.18, ease: EASE }}
+        >
+          &#10095;
+        </motion.button>
       </div>
 
       <div className="hero-dots">
         {slides.map((_, i) => (
-          <button
+          <motion.button
             key={i}
-            className={`hero-dot ${i === current ? 'active' : ''}`}
+            className="hero-dot"
             onClick={() => goTo(i)}
+            whileHover={{ scale: 1.3 }}
+            whileTap={{ scale: 0.9 }}
+            animate={{
+              width: i === current ? 24 : 10,
+              backgroundColor: i === current ? '#fff' : 'rgba(255,255,255,0.45)',
+            }}
+            transition={{ duration: 0.3, ease: EASE }}
           />
         ))}
       </div>

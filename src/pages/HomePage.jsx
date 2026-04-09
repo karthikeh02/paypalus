@@ -1,3 +1,5 @@
+import { motion } from 'motion/react'
+import { pageTransition } from '../animations'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Ribbon from '../components/Ribbon'
@@ -11,7 +13,7 @@ import Footer from '../components/Footer'
 
 export default function HomePage() {
   return (
-    <>
+    <motion.div {...pageTransition}>
       <Navbar />
       <Hero />
       <Ribbon />
@@ -22,6 +24,6 @@ export default function HomePage() {
       <Brands />
       <CTA />
       <Footer />
-    </>
+    </motion.div>
   )
 }

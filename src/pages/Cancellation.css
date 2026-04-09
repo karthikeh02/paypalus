@@ -82,16 +82,9 @@
   border: none;
   cursor: pointer;
   letter-spacing: 1px;
-  transition: all 0.2s;
-}
-
-.cancellation-continue:hover:not(.disabled) {
-  background: #f0f0f0;
-  transform: translateY(-1px);
 }
 
 .cancellation-continue.disabled {
-  opacity: 0.5;
   cursor: not-allowed;
 }
 

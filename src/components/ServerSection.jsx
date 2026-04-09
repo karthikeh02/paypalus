@@ -1,3 +1,5 @@
+import { motion } from 'motion/react'
+import { fadeUp, staggerContainer, staggerItem, viewportOnce, cardHover, cardTap, buttonHover, buttonTap } from '../animations'
 import './ServerSection.css'
 
 const serverCards = [
@@ -60,10 +62,22 @@ const macServerCards = [
 }))
 
 const ServerCard = ({ card }) => (
-  <div className="server-card">
+  <motion.div
+    className="server-card"
+    variants={staggerItem}
+    whileHover={cardHover}
+    whileTap={cardTap}
+  >
     <span className="server-card-label">{card.label}</span>
     <h4 className="server-card-name">{card.name}</h4>
-    <a href={card.href} className="btn server-btn">GET STARTED</a>
+    <motion.a
+      href={card.href}
+      className="btn server-btn"
+      whileHover={buttonHover}
+      whileTap={buttonTap}
+    >
+      GET STARTED
+    </motion.a>
     <ul className="server-card-features">
       {card.features.map((f, j) => (
         <li key={j}>
@@ -72,34 +86,74 @@ const ServerCard = ({ card }) => (
         </li>
       ))}
     </ul>
-  </div>
+  </motion.div>
 )
 
 export default function ServerSection() {
   return (
     <section className="server-section" id="supportbtn">
       <div className="container">
-        <h2 className="server-heading">
+        <motion.h2
+          className="server-heading"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           Your way to pay,<br />with PayPal
-        </h2>
+        </motion.h2>
 
-        <h3 className="server-subtitle">Server&reg;</h3>
-        <p className="server-desc">
+        <motion.h3
+          className="server-subtitle"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
+          Server&reg;
+        </motion.h3>
+        <motion.p
+          className="server-desc"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           All our verification is been held by AI, Making sure that after the
           verification is been completed, it automatically gets removed.
-        </p>
-        <div className="server-cards-grid">
+        </motion.p>
+        <motion.div
+          className="server-cards-grid"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {serverCards.map((card, i) => (
             <ServerCard card={card} key={i} />
           ))}
-        </div>
+        </motion.div>
 
-        <h3 className="server-subtitle">Mac Server&reg;</h3>
-        <div className="server-cards-grid">
+        <motion.h3
+          className="server-subtitle"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
+          Mac Server&reg;
+        </motion.h3>
+        <motion.div
+          className="server-cards-grid"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {macServerCards.map((card, i) => (
             <ServerCard card={card} key={i} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

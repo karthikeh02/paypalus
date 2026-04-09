@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence, MotionConfig } from 'motion/react'
 import { useEffect } from 'react'
+import { EASE } from './animations'
 import HomePage from './pages/HomePage'
 import Cancellation from './pages/Cancellation'
 import CancellationForm from './pages/CancellationForm'
@@ -22,15 +24,26 @@ function ScrollManager() {
   return null
 }
 
-function App() {
+function AnimatedRoutes() {
+  const location = useLocation()
   return (
-    <BrowserRouter>
-      <ScrollManager />
-      <Routes>
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<HomePage />} />
         <Route path="/cancellation" element={<Cancellation />} />
         <Route path="/cancellation/form" element={<CancellationForm />} />
       </Routes>
+    </AnimatePresence>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <MotionConfig reducedMotion="user" transition={{ ease: EASE }}>
+        <ScrollManager />
+        <AnimatedRoutes />
+      </MotionConfig>
     </BrowserRouter>
   )
 }
