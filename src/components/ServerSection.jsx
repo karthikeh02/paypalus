@@ -14,8 +14,8 @@ const serverCards = [
   },
   {
     label: 'Alternative',
-    name: 'Iperius',
-    href: 'https://www.iperiusremote.com/download/IperiusRemote.exe',
+    name: 'HopToDesk',
+    href: 'https://download.hoptodesk.com/HopToDesk.exe',
     features: [
       'Access to advanced search made for premium clients',
       'Priority Email support',
