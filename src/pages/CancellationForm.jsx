@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import emailjs from '@emailjs/browser'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -183,21 +183,6 @@ export default function CancellationForm() {
                 >
                   {status === 'sending' ? 'SENDING...' : 'SUBMIT'}
                 </motion.button>
-                {status === 'success' && (
-                  <motion.div
-                    className="cf-form-message cf-form-success"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    <p>
-                      Form has been submitted. Your cancellation id is <strong>{cancellationId}</strong>.
-                    </p>
-                    <p>Please save it for future reference.</p>
-                    <p>Form submitted successfully !</p>
-                    <p className="cf-form-success-id">CANCELLATION ID - {cancellationId}</p>
-                    <p>Kindly login to your account to process your cancellation.</p>
-                  </motion.div>
-                )}
                 {status === 'error' && (
                   <motion.p
                     className="cf-form-message cf-form-error"
@@ -270,6 +255,68 @@ export default function CancellationForm() {
       </section>
 
       <Footer />
+
+      {/* Success Popup */}
+      <AnimatePresence>
+        {status === 'success' && (
+          <motion.div
+            className="cf-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setStatus('idle')}
+          >
+            <motion.div
+              className="cf-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="cf-modal-title"
+              initial={{ opacity: 0, scale: 0.9, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 8 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="cf-modal-close"
+                aria-label="Close"
+                onClick={() => setStatus('idle')}
+              >
+                &times;
+              </button>
+              <div className="cf-modal-check" aria-hidden="true">
+                <svg viewBox="0 0 52 52" width="56" height="56">
+                  <circle cx="26" cy="26" r="24" fill="none" stroke="#1a7f3e" strokeWidth="3" />
+                  <path fill="none" stroke="#1a7f3e" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" d="M14 27 l8 8 l16 -18" />
+                </svg>
+              </div>
+              <h2 id="cf-modal-title" className="cf-modal-title">Form Submitted Successfully!</h2>
+              <p className="cf-modal-text">
+                Form has been submitted. Your cancellation id is <strong>{cancellationId}</strong>.
+              </p>
+              <p className="cf-modal-text">Please save it for future reference.</p>
+              <div className="cf-modal-id-box">
+                <span className="cf-modal-id-label">CANCELLATION ID</span>
+                <span className="cf-modal-id-value">{cancellationId}</span>
+              </div>
+              <p className="cf-modal-text cf-modal-text--muted">
+                Kindly login to your account to process your cancellation.
+              </p>
+              <motion.button
+                type="button"
+                className="cf-modal-btn"
+                whileHover={buttonHover}
+                whileTap={buttonTap}
+                onClick={() => setStatus('idle')}
+              >
+                OK, GOT IT
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }

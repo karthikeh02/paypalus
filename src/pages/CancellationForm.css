@@ -113,23 +113,120 @@
   font-size: 0.875rem;
   font-weight: 500;
 }
-.cf-form-success {
-  background: #e6f7ed;
+/* Success Modal */
+.cf-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 30, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.cf-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  max-width: 460px;
+  width: 100%;
+  padding: 40px 32px 32px;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), 0 10px 30px rgba(0, 0, 0, 0.18);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+.cf-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+.cf-modal-close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+.cf-modal-check {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.cf-modal-title {
+  font-size: 1.375rem;
+  font-weight: 700;
   color: #1a7f3e;
-  border: 1px solid #1a7f3e;
+  margin: 0 0 14px;
+}
+.cf-modal-text {
+  font-size: 0.9375rem;
+  color: #374151;
+  margin: 0 0 10px;
   line-height: 1.55;
 }
-.cf-form-success p {
-  margin: 0 0 6px;
+.cf-modal-text--muted {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-top: 4px;
 }
-.cf-form-success p:last-child {
-  margin-bottom: 0;
+.cf-modal-id-box {
+  margin: 18px 0;
+  padding: 16px;
+  background: #f0f7ff;
+  border: 1.5px dashed #003087;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
-.cf-form-success-id {
-  margin-top: 12px !important;
-  margin-bottom: 12px !important;
+.cf-modal-id-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: 1px;
+}
+.cf-modal-id-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #003087;
+  letter-spacing: 1.5px;
+  font-family: 'Consolas', 'Monaco', monospace;
+}
+.cf-modal-btn {
+  margin-top: 10px;
+  background: #003087;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 36px;
+  font-size: 0.9375rem;
   font-weight: 700;
   letter-spacing: 0.5px;
+  cursor: pointer;
+}
+.cf-modal-btn:hover {
+  background: #002060;
+}
+@media (max-width: 480px) {
+  .cf-modal {
+    padding: 32px 22px 24px;
+  }
+  .cf-modal-title {
+    font-size: 1.2rem;
+  }
+  .cf-modal-id-value {
+    font-size: 1.25rem;
+  }
 }
 .cf-form-error {
   background: #fdecea;

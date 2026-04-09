@@ -72,15 +72,20 @@ export default function Navbar() {
         </div>
         <div className="navbar-right">
           <NavLink>
-            <motion.span className="btn btn-nav-login" whileHover={buttonHover} whileTap={buttonTap}>
+            <motion.span className="btn btn-nav-login nav-desktop-only" whileHover={buttonHover} whileTap={buttonTap}>
               Log In
             </motion.span>
           </NavLink>
           <NavLink>
-            <motion.span className="btn btn-nav-signup" whileHover={buttonHover} whileTap={buttonTap}>
+            <motion.span className="btn btn-nav-signup nav-desktop-only" whileHover={buttonHover} whileTap={buttonTap}>
               Sign Up
             </motion.span>
           </NavLink>
+          <Link to="/cancellation" className="nav-mobile-only">
+            <motion.span className="btn btn-nav-cancellation" whileHover={buttonHover} whileTap={buttonTap}>
+              Cancellation
+            </motion.span>
+          </Link>
         </div>
       </div>
     </motion.nav>

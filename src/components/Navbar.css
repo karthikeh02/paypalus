@@ -89,6 +89,28 @@
   background: #002060;
 }
 
+.btn-nav-cancellation {
+  background: #003087;
+  color: #fff;
+  font-size: 0.9375rem;
+  padding: 10px 22px;
+  border-radius: 24px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.btn-nav-cancellation:hover {
+  background: #002060;
+}
+
+.nav-mobile-only { display: none; }
+
 @media (max-width: 768px) {
   .navbar-nav { display: none; }
+  .nav-desktop-only { display: none !important; }
+  .nav-mobile-only { display: inline-flex; }
+  .btn-nav-cancellation {
+    padding: 8px 18px;
+    font-size: 0.875rem;
+  }
 }
