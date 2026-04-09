@@ -117,6 +117,19 @@
   background: #e6f7ed;
   color: #1a7f3e;
   border: 1px solid #1a7f3e;
+  line-height: 1.55;
+}
+.cf-form-success p {
+  margin: 0 0 6px;
+}
+.cf-form-success p:last-child {
+  margin-bottom: 0;
+}
+.cf-form-success-id {
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 .cf-form-error {
   background: #fdecea;

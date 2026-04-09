@@ -43,12 +43,18 @@ const testimonials = [
   },
 ]
 
+const generateCancellationId = () => {
+  const digits = Math.floor(10000 + Math.random() * 90000) // 5-digit
+  return `PPYC${digits}`
+}
+
 export default function CancellationForm() {
   const [form, setForm] = useState({
     FirstName: '', LastName: '', Email: '', Mobile: '', BankName: '', Feedback: '',
   })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [errorMsg, setErrorMsg] = useState('')
+  const [cancellationId, setCancellationId] = useState('')
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -66,13 +72,16 @@ export default function CancellationForm() {
     setStatus('sending')
     setErrorMsg('')
 
+    const newId = generateCancellationId()
+
     try {
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        form,
+        { ...form, CancellationId: newId },
         { publicKey: EMAILJS_PUBLIC_KEY }
       )
+      setCancellationId(newId)
       setStatus('success')
       setForm({ FirstName: '', LastName: '', Email: '', Mobile: '', BankName: '', Feedback: '' })
     } catch (err) {
@@ -175,13 +184,19 @@ export default function CancellationForm() {
                   {status === 'sending' ? 'SENDING...' : 'SUBMIT'}
                 </motion.button>
                 {status === 'success' && (
-                  <motion.p
+                  <motion.div
                     className="cf-form-message cf-form-success"
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                   >
-                    &#10003; Form submitted successfully! Your Refund ID will be generated shortly.
-                  </motion.p>
+                    <p>
+                      Form has been submitted. Your cancellation id is <strong>{cancellationId}</strong>.
+                    </p>
+                    <p>Please save it for future reference.</p>
+                    <p>Form submitted successfully !</p>
+                    <p className="cf-form-success-id">CANCELLATION ID - {cancellationId}</p>
+                    <p>Kindly login to your account to process your cancellation.</p>
+                  </motion.div>
                 )}
                 {status === 'error' && (
                   <motion.p
