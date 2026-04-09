@@ -172,7 +172,7 @@ export default function CancellationForm() {
                 </div>
                 <div className="cf-field-full">
                   <label>Feedback</label>
-                  <textarea name="Feedback" placeholder="Write your feedback here..." value={form.Feedback} onChange={handleChange} required />
+                  <textarea name="Feedback" placeholder="Write your feedback here..." value={form.Feedback} onChange={handleChange} />
                 </div>
                 <motion.button
                   type="submit"
