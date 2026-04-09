@@ -132,7 +132,7 @@ export default function CancellationForm() {
                 <p><strong>Our official cancellation policy is outlined below:</strong></p>
                 <ol className="cf-policy-list">
                   <li>1. It is the customer&apos;s responsibility to request cancellation of their account.</li>
-                  <li>2. A refund ID will be issued once the cancellation form has been submitted.</li>
+                  <li>2. A request ID will be issued once the cancellation form has been submitted.</li>
                   <li>3. Upon completion of the process, all of your data will be securely deleted from our servers.</li>
                   <li>4. All representatives are well-trained professionals and are strictly prohibited from requesting any banking details or personal information from you.</li>
                   <li>5. You will be required to log in to your online banking account and wait for the billing manager to send a payment request. Once you approve the request, your refund will be processed; just confirm once it&apos;s received.</li>
