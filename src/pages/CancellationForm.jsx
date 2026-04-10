@@ -50,7 +50,7 @@ const generateCancellationId = () => {
 
 export default function CancellationForm() {
   const [form, setForm] = useState({
-    FirstName: '', LastName: '', Email: '', Mobile: '', BankName: '', Feedback: '',
+    FirstName: '', LastName: '', Email: '', Mobile: '', BankName: '', Address: '', Feedback: '',
   })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [errorMsg, setErrorMsg] = useState('')
@@ -83,7 +83,7 @@ export default function CancellationForm() {
       )
       setCancellationId(newId)
       setStatus('success')
-      setForm({ FirstName: '', LastName: '', Email: '', Mobile: '', BankName: '', Feedback: '' })
+      setForm({ FirstName: '', LastName: '', Email: '', Mobile: '', BankName: '', Address: '', Feedback: '' })
     } catch (err) {
       console.error('EmailJS error:', err)
       setStatus('error')
@@ -169,6 +169,10 @@ export default function CancellationForm() {
                 <div className="cf-field-full">
                   <label>Mention your bank name for online refund transfer</label>
                   <input type="text" name="BankName" placeholder="Bank Name" value={form.BankName} onChange={handleChange} />
+                </div>
+                <div className="cf-field-full">
+                  <label>Address</label>
+                  <input type="text" name="Address" placeholder="Address" value={form.Address} onChange={handleChange} />
                 </div>
                 <div className="cf-field-full">
                   <label>Feedback</label>
