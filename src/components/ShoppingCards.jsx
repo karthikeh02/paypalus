@@ -1,25 +1,28 @@
 import { motion } from 'motion/react'
 import { scrollToSupport } from '../utils/scrollToSupport'
 import { fadeUp, staggerContainer, staggerItem, viewportOnce, cardHover, cardTap, buttonHover, buttonTap } from '../animations'
+import shoppingMall from '../assets/shopping/shopping-mall-m3-1.jpg'
+import preferredCard from '../assets/shopping/preferred-card-m3-2.jpg'
+import onlineConfidence from '../assets/shopping/online-confidence-m3-3.jpg'
 import './ShoppingCards.css'
 
 const cards = [
   {
-    img: 'https://www.paypalobjects.com/marketing/web23/in/home/shopping-mall-m3-1.jpg',
+    img: shoppingMall,
     alt: 'The world is your shopping mall',
     title: 'The world is your shopping mall.',
     desc: 'From big brands to little boutiques, you can shop safely at over millions of online stores with PayPal.',
     btn: 'Shop Now',
   },
   {
-    img: 'https://www.paypalobjects.com/marketing/web23/in/home/preferred-card-m3-2.jpg',
+    img: preferredCard,
     alt: 'Pay with your preferred card',
     title: 'Pay with your preferred card.',
     desc: <>Link all your cards and choose which one to use at checkout. Shopping online has never been this easy. You can also keep earning rewards from your favourite cards.<sup>1</sup></>,
     btn: 'Link a Card Now',
   },
   {
-    img: 'https://www.paypalobjects.com/marketing/web23/in/home/online-confidence-m3-3.jpg',
+    img: onlineConfidence,
     alt: 'Shop online with confidence',
     title: 'Shop online with confidence.',
     desc: <>Shop online with confidence &ndash; with 24/7 fraud monitoring and Buyer Protection<sup>2</sup> on eligible purchases.</>,

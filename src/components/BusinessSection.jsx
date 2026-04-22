@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { scrollToSupport } from '../utils/scrollToSupport'
 import { fadeUp, fadeLeft, fadeRight, viewportOnce, buttonHover, buttonTap } from '../animations'
+import businessApp from '../assets/business/paypal-for-business-m3-4.png'
 import './BusinessSection.css'
 
 export default function BusinessSection() {
@@ -59,7 +60,7 @@ export default function BusinessSection() {
             viewport={viewportOnce}
           >
             <img
-              src="https://www.paypalobjects.com/marketing/web23/in/home/paypal-for-business-m3-4.png"
+              src={businessApp}
               alt="PayPal Business App"
             />
           </motion.div>

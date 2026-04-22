@@ -1,13 +1,18 @@
 import { motion } from 'motion/react'
 import { fadeUp, viewportOnce } from '../animations'
+import spotify from '../assets/brands/spotify-premium.png'
+import asos from '../assets/brands/asos.png'
+import grab from '../assets/brands/grab.png'
+import qoo10 from '../assets/brands/qoo10.png'
+import foodpanda from '../assets/brands/foodpanda.png'
 import './Brands.css'
 
 const brands = [
-  { src: 'https://www.paypalobjects.com/marketing/web23/in/home/spotify-premium.png', alt: 'Spotify' },
-  { src: 'https://www.paypalobjects.com/marketing/web23/in/home/asos.png', alt: 'ASOS' },
-  { src: 'https://www.paypalobjects.com/marketing/web23/in/home/grab.png', alt: 'Grab' },
-  { src: 'https://www.paypalobjects.com/marketing/web23/in/home/qoo10.png', alt: 'Qoo10' },
-  { src: 'https://www.paypalobjects.com/marketing/web23/in/home/foodpanda.png', alt: 'Foodpanda' },
+  { src: spotify, alt: 'Spotify' },
+  { src: asos, alt: 'ASOS' },
+  { src: grab, alt: 'Grab' },
+  { src: qoo10, alt: 'Qoo10' },
+  { src: foodpanda, alt: 'Foodpanda' },
 ]
 
 const brandsContainer = {

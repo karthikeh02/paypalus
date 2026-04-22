@@ -1,25 +1,29 @@
 import { motion } from 'motion/react'
 import { fadeUp, staggerContainer, staggerItem, viewportOnce } from '../animations'
+import activeAccount from '../assets/stats/active-account-m4-1.png'
+import paymentTransactions from '../assets/stats/payment-tansactions-m4-2.png'
+import paymentVolume from '../assets/stats/payment-valume-m4-3.png'
+import buyerConfidence from '../assets/stats/buyer-confidence-m4-4.png'
 import './Stats.css'
 
 const stats = [
   {
-    icon: 'https://www.paypalobjects.com/marketing/web23/in/home/active-account-m4-1.png',
+    icon: activeAccount,
     alt: 'Active accounts',
     text: <>427M active accounts.<sup>4</sup></>,
   },
   {
-    icon: 'https://www.paypalobjects.com/marketing/web23/in/home/payment-tansactions-m4-2.png',
+    icon: paymentTransactions,
     alt: 'Payment transactions',
     text: <>6.5B Total payment transactions.<sup>6</sup></>,
   },
   {
-    icon: 'https://www.paypalobjects.com/marketing/web23/in/home/payment-valume-m4-3.png',
+    icon: paymentVolume,
     alt: 'Payment volume',
     text: <>$403.9B total payment volume.<sup>5</sup></>,
   },
   {
-    icon: 'https://www.paypalobjects.com/marketing/web23/in/home/buyer-confidence-m4-4.png',
+    icon: buyerConfidence,
     alt: 'Buyer confidence',
     text: <>74% increase in buyer confidence.<sup>7</sup></>,
   },

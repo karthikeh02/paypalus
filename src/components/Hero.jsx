@@ -2,17 +2,19 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { scrollToSupport } from '../utils/scrollToSupport'
 import { heroSlide, EASE, buttonHover, buttonTap } from '../animations'
+import heroBanner1 from '../assets/hero-banner-desktop-1.jpg'
+import heroBanner2 from '../assets/hero-banner-desktop-2.jpg'
 import './Hero.css'
 
 const slides = [
   {
-    bg: 'https://www.paypalobjects.com/marketing/web23/in/home/hero-banner-desktop-1.jpg',
+    bg: heroBanner1,
     h1: 'Secure payments. Smooth shopping.',
     p: 'More ways to pay and more places to shop. Send money quickly and easily around the globe.',
     btnText: 'Sign Up',
   },
   {
-    bg: 'https://www.paypalobjects.com/marketing/web23/in/home/hero-banner-desktop-2.jpg',
+    bg: heroBanner2,
     h1: 'Sell just about anywhere in the world.',
     p: 'Whether you have an online shop or need to accept payments remotely, we can help you get paid fast.',
     btnText: 'Connect With Us',
